@@ -1,0 +1,28 @@
+.how__steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.how__step {
+  position: relative;
+  min-height: 150px;
+  border-top: 2px solid var(--primary);
+  padding: 20px 16px;
+  background: linear-gradient(180deg, rgba(0, 201, 167, 0.12), transparent);
+}
+
+.how__step span {
+  color: var(--accent);
+  font-weight: 900;
+}
+
+.how__step h3 {
+  margin: 24px 0 0;
+}
+
+@media (max-width: 760px) {
+  .how__steps {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,25 @@
+.dashboard__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.chart-panel {
+  min-width: 0;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.chart-panel h3 {
+  margin: 0 0 18px;
+}
+
+.recharts-wrapper {
+  color: var(--muted);
+}
+
+@media (max-width: 900px) {
+  .dashboard__grid {
+    grid-template-columns: 1fr;
+  }
+}
