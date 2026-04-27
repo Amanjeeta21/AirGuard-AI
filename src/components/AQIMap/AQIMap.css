@@ -1,11 +1,11 @@
 .aqi-map {
   position: relative;
-  min-height: 470px;
+  min-height: 560px;
   overflow: hidden;
   border-radius: 8px;
   background:
-    linear-gradient(135deg, rgba(225, 238, 229, 0.9), rgba(200, 225, 218, 0.86)),
-    radial-gradient(circle at 25% 72%, rgba(148, 210, 189, 0.46), transparent 13rem);
+    linear-gradient(135deg, rgba(234, 240, 231, 0.98), rgba(216, 231, 222, 0.96)),
+    radial-gradient(circle at 25% 72%, rgba(148, 210, 189, 0.42), transparent 13rem);
   color: #17343c;
 }
 
@@ -14,10 +14,10 @@
   inset: 0;
   content: "";
   background:
-    linear-gradient(rgba(255, 255, 255, 0.34) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.3) 1px, transparent 1px);
-  background-size: 58px 58px;
-  opacity: 0.72;
+    linear-gradient(30deg, rgba(255, 255, 255, 0.28) 12%, transparent 12% 88%, rgba(255, 255, 255, 0.28) 88%),
+    linear-gradient(120deg, rgba(255, 255, 255, 0.22) 12%, transparent 12% 88%, rgba(255, 255, 255, 0.22) 88%);
+  background-size: 160px 160px;
+  opacity: 0.5;
 }
 
 .aqi-map::after {
@@ -35,7 +35,7 @@
   top: 18px;
   right: 18px;
   left: 18px;
-  z-index: 5;
+  z-index: 10;
   display: flex;
   justify-content: space-between;
   gap: 12px;
@@ -44,17 +44,19 @@
 .aqi-map__search,
 .aqi-map__layer,
 .aqi-map__zoom,
-.aqi-map__legend {
+.aqi-map__legend,
+.aqi-map__locate,
+.aqi-map__compass {
   border: 1px solid rgba(23, 52, 60, 0.12);
-  background: rgba(255, 255, 255, 0.9);
-  box-shadow: 0 12px 34px rgba(7, 19, 31, 0.14);
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 3px 12px rgba(7, 19, 31, 0.2);
 }
 
 .aqi-map__search {
   display: inline-flex;
   align-items: center;
   min-height: 44px;
-  min-width: min(360px, 66vw);
+  min-width: min(420px, 66vw);
   gap: 10px;
   border-radius: 8px;
   padding: 0 14px;
@@ -90,20 +92,20 @@
 }
 
 .aqi-map__road {
-  stroke: rgba(255, 255, 255, 0.95);
-  stroke-width: 14;
+  stroke: rgba(255, 255, 255, 0.98);
+  stroke-width: 17;
   filter: drop-shadow(0 1px 0 rgba(23, 52, 60, 0.12));
 }
 
 .aqi-map__highway {
-  stroke: #f7c873;
-  stroke-width: 18;
+  stroke: #f8d36e;
+  stroke-width: 22;
   filter: drop-shadow(0 1px 0 rgba(23, 52, 60, 0.14));
 }
 
 .aqi-map__river {
-  stroke: rgba(91, 176, 214, 0.48);
-  stroke-width: 38;
+  stroke: rgba(99, 181, 214, 0.52);
+  stroke-width: 44;
 }
 
 .aqi-map__parks {
@@ -115,7 +117,7 @@
 .aqi-map__park {
   position: absolute;
   border-radius: 46% 54% 42% 58%;
-  background: rgba(83, 181, 118, 0.26);
+  background: rgba(111, 190, 119, 0.34);
 }
 
 .aqi-map__park--one {
@@ -141,22 +143,78 @@
 
 .aqi-map__label {
   position: absolute;
-  z-index: 3;
-  color: rgba(23, 52, 60, 0.5);
+  z-index: 4;
+  color: rgba(42, 73, 75, 0.58);
   font-size: 0.78rem;
   font-weight: 800;
   pointer-events: none;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9);
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+}
+
+.aqi-map__label--park {
+  color: #357b48;
+}
+
+.aqi-map__label--water {
+  color: #35789a;
+}
+
+.aqi-map__label--poi {
+  color: #6b5a35;
+}
+
+.aqi-map__road-label {
+  position: absolute;
+  z-index: 5;
+  color: rgba(92, 92, 84, 0.72);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0;
+  pointer-events: none;
+  text-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.95),
+    1px 0 0 rgba(255, 255, 255, 0.95);
+  white-space: nowrap;
+}
+
+.aqi-map__poi {
+  position: absolute;
+  z-index: 6;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: rgba(55, 75, 75, 0.7);
+  font-size: 0.68rem;
+  font-weight: 800;
+  pointer-events: none;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.95);
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+}
+
+.aqi-map__poi i {
+  width: 7px;
+  height: 7px;
+  border: 1px solid rgba(255, 255, 255, 0.92);
+  border-radius: 50%;
+  background: #7c8f95;
+}
+
+.aqi-map__city {
+  position: absolute;
+  z-index: 8;
+  transform: translate(-50%, -100%);
 }
 
 .aqi-map__marker {
-  position: absolute;
-  z-index: 6;
+  position: relative;
   width: 34px;
   height: 44px;
   border: 0;
   background: transparent;
   cursor: pointer;
-  transform: translate(-50%, -100%);
 }
 
 .aqi-map__pin {
@@ -187,6 +245,7 @@
   position: absolute;
   bottom: 54px;
   left: 50%;
+  z-index: 10;
   min-width: 160px;
   transform: translateX(-50%);
   border: 1px solid rgba(23, 52, 60, 0.12);
@@ -216,11 +275,28 @@
   font-weight: 800;
 }
 
+.aqi-map__city-label {
+  position: absolute;
+  top: 38px;
+  left: 50%;
+  z-index: 7;
+  border: 1px solid rgba(23, 52, 60, 0.12);
+  border-radius: 6px;
+  padding: 3px 6px;
+  background: rgba(255, 255, 255, 0.88);
+  color: #17343c;
+  font-size: 0.7rem;
+  font-weight: 900;
+  pointer-events: none;
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+
 .aqi-map__zoom {
   position: absolute;
   right: 18px;
   bottom: 78px;
-  z-index: 5;
+  z-index: 10;
   display: grid;
   overflow: hidden;
   border-radius: 8px;
@@ -241,11 +317,25 @@
   border-top: 1px solid rgba(23, 52, 60, 0.12);
 }
 
+.aqi-map__locate {
+  position: absolute;
+  right: 18px;
+  bottom: 174px;
+  z-index: 10;
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border-radius: 8px;
+  color: #24484f;
+  cursor: pointer;
+}
+
 .aqi-map__legend {
   position: absolute;
   right: 18px;
   bottom: 18px;
-  z-index: 5;
+  z-index: 10;
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
@@ -280,9 +370,35 @@
   background: #ef4444;
 }
 
+.aqi-map__scale {
+  position: absolute;
+  bottom: 18px;
+  left: 18px;
+  z-index: 10;
+  width: 74px;
+  border-bottom: 3px solid rgba(23, 52, 60, 0.72);
+  color: #24484f;
+  font-size: 0.68rem;
+  font-weight: 900;
+  text-align: center;
+}
+
+.aqi-map__compass {
+  position: absolute;
+  right: 18px;
+  top: 78px;
+  z-index: 10;
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border-radius: 50%;
+  color: #24484f;
+}
+
 @media (max-width: 720px) {
   .aqi-map {
-    min-height: 540px;
+    min-height: 600px;
   }
 
   .aqi-map__topbar {
@@ -299,5 +415,11 @@
     left: 18px;
     right: auto;
     max-width: calc(100% - 88px);
+  }
+
+  .aqi-map__label,
+  .aqi-map__poi,
+  .aqi-map__road-label {
+    font-size: 0.62rem;
   }
 }
